@@ -11,6 +11,7 @@ const Home = () =>  {
           <Link href="https://github.com/NjugunaBrian" passHref={true}>
           <Button variant="outline">
             <Github className="size-4 mr-2" />
+            <span className="sr-only">Github link</span>
             Github
           </Button>
           </Link>
