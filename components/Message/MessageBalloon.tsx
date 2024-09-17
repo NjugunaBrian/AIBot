@@ -1,3 +1,5 @@
+"use client"
+
 import { CodeBlockChild, extractTextFromCodeBlock, formatDate, parseMimeType } from "@/lib/utils"
 import Markdown from "react-markdown"
 import { Label } from "../ui/label"
