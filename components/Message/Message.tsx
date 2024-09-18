@@ -14,7 +14,7 @@ type MessageProps = {
 
 const Message = ({ sender, children }: MessageProps) => {
     return (
-        <div className={cn('flex flex-row items-center gap-3', sender === 'USER' && 'justify-end')}>
+        <div className={cn('flex flex-row items-center gap-3 m-3', sender === 'USER' && 'justify-end')}>
             {children}
         </div>
     )
