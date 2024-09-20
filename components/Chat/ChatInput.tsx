@@ -18,7 +18,7 @@ const ChatInput = ({ onChange, value, onSubmit, disabled}: Props) => {
     const formRef = useRef<HTMLFormElement>(null);
   return (
     <form ref={formRef} onSubmit={onSubmit}>
-        <div className='flex flex-row items-center gap-10'>
+        <div className='flex flex-row items-center gap-8'>
             <div>
                 <Textarea 
                     className='flex max-h-[14rem] min-h-[2.5rem] flex-1'

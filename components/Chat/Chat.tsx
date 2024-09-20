@@ -24,7 +24,7 @@ const Chat = ({messages}: Props) => {
     }, [messages])
 
   return (
-    <main ref={scrollableContentRef} className='flex flex-1 flex-col gap-4 overflow-y-scroll p-5 bg-zinc-50 dark:bg-zinc-950'>
+    <main ref={scrollableContentRef} className='flex flex-1 flex-col gap-4 overflow-y-auto p-5 bg-zinc-50 dark:bg-zinc-950'>
         {messages.map((message) => (
             <Message key={message.id} sender={message.creator}>
                 {message.creator === 'AI' ? <Avatar.Bot /> : null}

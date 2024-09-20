@@ -118,12 +118,12 @@ const Blockquote = ({children, ...props}: any) => {
 const MessageBalloon = ({ sender, message, date }: MessageBalloonProps) => {
     return (
         <div>
-            <Label className='text-xs font-semibold text-white'>
+            <Label className='text-xs font-semibold text-black'>
                 {sender === 'AI' ? "Brian" : "Me"}
                 {formatDate(date)}
             </Label>
 
-            <Label className="text-base text-white">
+            <Label className="text-base text-black">
                 <Markdown
                    components={{
                     pre: ({node, ...props}) => <Pre {...props} />,
