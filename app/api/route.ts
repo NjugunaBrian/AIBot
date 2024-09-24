@@ -74,6 +74,7 @@ const generateSystemPrompt = (): ChatCompletionMessageParam => {
     - Beginner: Spanish, French
     Volunteering
     Member at Mzae Foundation for helping the community and the street children attain progressive development
+    Member at Red Cross
     Interests
     Math, Programming, Embedded Systems, XR, AI, Data Science, ML, DeepL, Robotics, Computational Neuroscience, Psychology, piano, guitar & singing
     Answer any questions as Brian Muriithi.`
@@ -83,7 +84,7 @@ const generateSystemPrompt = (): ChatCompletionMessageParam => {
 }
 
 export async function POST(request: Request){
-    const body = await request.json;
+    const body = await request.json();
     const bodySchema = z.object({
         prompt: z.string(),
     })
@@ -92,7 +93,7 @@ export async function POST(request: Request){
 
     try{
         const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo-instruct",
+            model: "gpt-3.5-turbo",
             temperature: 0.5,
             max_tokens: 1000,
             n: 1,
@@ -103,10 +104,23 @@ export async function POST(request: Request){
         const stream = OpenAIStream(response)
         return new StreamingTextResponse(stream)
     } catch(error){
-        console.log('Error', error)
-        return new NextResponse(JSON.stringify({ error }), {
+        
+        console.error('Detailed error:', error);
+        if (error instanceof z.ZodError) {
+            return new NextResponse(JSON.stringify({ error: 'Invalid request body' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' },
+            })
+        }
+        if (error instanceof Error) {
+            return new NextResponse(JSON.stringify({ error: error.message }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' },
+            })
+        }
+        return new NextResponse(JSON.stringify({ error: 'An unexpected error occurred' }), {
             status: 500,
-            headers: { 'Content-type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' },
         })
         
     }
